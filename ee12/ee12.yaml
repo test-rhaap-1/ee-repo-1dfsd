@@ -1,0 +1,27 @@
+---
+version: 3
+
+images:
+  base_image:
+    name: 'registry.access.redhat.com/ubi9/python-311:latest'
+
+dependencies:
+  galaxy:
+    collections:
+      - name: ansible.posix
+      - name: ansible.mcp_builder
+      - name: ansible.mcp
+
+additional_build_files:
+  - src: ./ansible.cfg
+    dest: configs
+  - src: ./mcp-vars.yaml
+    dest: configs
+
+additional_build_steps:
+  prepend_base:
+    - COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg
+    - COPY _build/configs/mcp-vars.yaml /tmp/mcp-vars.yaml
+  append_final:
+    - RUN ansible-playbook ansible.mcp_builder.install_mcp -e mcp_servers=github_mcp -e @/tmp/mcp-vars.yaml
+    - RUN rm -f /etc/ansible/ansible.cfg /tmp/mcp-vars.yaml
