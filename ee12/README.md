@@ -1,4 +1,4 @@
-# Ansible Execution Environment Definition: Getting Started Guide
+# Ansible Execution Environment Definition: Getting Started Guide Example
 
 Congratulations on Your New Execution Environment Definition file!
 
