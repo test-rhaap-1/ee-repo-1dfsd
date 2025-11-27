@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ee1
+  description: abc
+  tags:
+    - execution-environment
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/managed-by-location: github.com?repo=ee-repo-1dfsd&owner=test-rhaap-1
+    ansible.io/scm-provider: Github
+    backstage.io/source-template: template:default/ansible-execution-environment-builder-start-from-scratch
+spec:
+  type: execution-environment
+  owner: user:default/admin
+  lifecycle: production

@@ -1,0 +1,22 @@
+---
+version: 3
+
+images:
+  base_image:
+    name: 'registry.access.redhat.com/ubi9/python-311:latest'
+
+dependencies:
+  galaxy:
+    collections:
+      - name: ansible.posix
+      - name: community.general
+
+additional_build_files:
+  - src: ./ansible.cfg
+    dest: configs
+
+additional_build_steps:
+  prepend_base:
+    - COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg
+  append_final:
+    - RUN rm -f /etc/ansible/ansible.cfg
